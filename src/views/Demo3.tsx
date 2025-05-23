@@ -3,11 +3,10 @@ import { DEFAULT_TASKS } from '../constants'
 import type { FC, FormEvent } from 'react'
 import type { Task } from '../types'
 
-export const Final: FC = () => {
+export const Demo3: FC = () => {
   const [tasks, setTasks] = useState<Task[]>(DEFAULT_TASKS)
   const [taskName, setTaskName] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -16,29 +15,22 @@ export const Final: FC = () => {
 
     setLoading(true)
     setTaskName('')
-    setMessage('Saving')
 
     // mock network delay
     setTimeout(() => {
       setTasks(prev => [...prev, { id: Date.now(), name }])
       setLoading(false)
-      setMessage('Task added')
-
-      // clear message after a couple of seconds
-      setTimeout(() => setMessage(''), 2000)
     }, 2000)
   }
 
   const deleteTask = (id: number) => {
     setTasks(prev => prev.filter(task => task.id !== id))
-    setMessage('Message deleted')
-    setTimeout(() => setMessage(''), 2000)
   }
 
   return (
     <>
       <header className="header">
-        <h1 className="page-title">Screen reader demo 4 (final)</h1>
+        <h1 className="page-title">Screen reader demo 3 (ARIA)</h1>
       </header>
 
       <nav className="nav">
@@ -76,7 +68,6 @@ export const Final: FC = () => {
               >+</button>
             </div>
           </form>
-          <div role="status" className="visually-hidden">{message}</div>
         </section>
 
         <section className="section">
@@ -86,7 +77,7 @@ export const Final: FC = () => {
           {tasks.map(({ id, name }) => (
             <li key={id} className="task-list__item">
               {name}
-              <button className="btn" onClick={() => deleteTask(id)}>Delete <span className="visually-hidden">{name}</span></button>
+              <button className="btn" onClick={() => deleteTask(id)}>Delete</button>
             </li>
           ))}
           </ul>

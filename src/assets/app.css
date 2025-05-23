@@ -106,18 +106,23 @@ body {
 }
 
 .btn {
+  align-items: center;
   background-color: var(--colour-btn-bg);
   color: var(--colour-btn-txt);
   border: 0;
   border-radius: 0.25rem;
   box-sizing: border-box;
   cursor: pointer;
+  display: flex;
+  font-size: 0.8rem;
   font-weight: 600;
   height: 1.5rem;
+  justify-content: center;
   padding-inline: 0.5rem;
 
   &.submit {
     aspect-ratio: 1 / 1;
+    font-size: 2rem;
     height: 2.5rem;
   }
 }
@@ -148,4 +153,8 @@ body {
   gap: 0.5rem;
   grid-template-columns: 1fr auto;
   width: fit-content;
+}
+
+*:disabled {
+  opacity: 0.5;
 }

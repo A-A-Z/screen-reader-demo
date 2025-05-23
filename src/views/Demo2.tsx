@@ -3,11 +3,10 @@ import { DEFAULT_TASKS } from '../constants'
 import type { FC, FormEvent } from 'react'
 import type { Task } from '../types'
 
-export const Final: FC = () => {
+export const Demo2: FC = () => {
   const [tasks, setTasks] = useState<Task[]>(DEFAULT_TASKS)
   const [taskName, setTaskName] = useState('')
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -16,33 +15,26 @@ export const Final: FC = () => {
 
     setLoading(true)
     setTaskName('')
-    setMessage('Saving')
 
     // mock network delay
     setTimeout(() => {
       setTasks(prev => [...prev, { id: Date.now(), name }])
       setLoading(false)
-      setMessage('Task added')
-
-      // clear message after a couple of seconds
-      setTimeout(() => setMessage(''), 2000)
     }, 2000)
   }
 
   const deleteTask = (id: number) => {
     setTasks(prev => prev.filter(task => task.id !== id))
-    setMessage('Message deleted')
-    setTimeout(() => setMessage(''), 2000)
   }
 
   return (
     <>
       <header className="header">
-        <h1 className="page-title">Screen reader demo 4 (final)</h1>
+        <h1 className="page-title">Screen reader demo 2 (Semantic)</h1>
       </header>
 
       <nav className="nav">
-        <ul className="nav-list" aria-label="Main navigation">
+        <ul className="nav-list">
           <li><a href="#" className="nav-link">Link 1</a></li>
           <li><a href="#" className="nav-link">Link 1</a></li>
           <li><a href="#" className="nav-link">Link 1</a></li>
@@ -64,29 +56,25 @@ export const Final: FC = () => {
                 placeholder="Enter new task name"
                 value={taskName}
                 onChange={e => setTaskName(e.currentTarget.value)}
-                aria-description="Enter new task name"
                 disabled={loading}
               />
               <button
                 type="submit"
                 className="btn submit"
                 disabled={loading}
-                aria-busy={loading}
-                aria-label="Save task to list"
               >+</button>
             </div>
           </form>
-          <div role="status" className="visually-hidden">{message}</div>
         </section>
 
         <section className="section">
           <h2 id="task-list-title" className="section-header">My Tasks</h2>
           <p id="task-list-desc" className="p">These are you current active tasks:</p>
-          <ul className="task-list" aria-labeledby="task-list-title" aria-describedby="task-list-desc" aria-busy={loading}>
+          <ul className="task-list">
           {tasks.map(({ id, name }) => (
             <li key={id} className="task-list__item">
               {name}
-              <button className="btn" onClick={() => deleteTask(id)}>Delete <span className="visually-hidden">{name}</span></button>
+              <button className="btn" onClick={() => deleteTask(id)}>Delete</button>
             </li>
           ))}
           </ul>
